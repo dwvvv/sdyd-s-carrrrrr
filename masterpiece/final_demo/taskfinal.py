@@ -15,13 +15,13 @@ import HiwonderSDK.mecanum as mecanum
 
 chassis = mecanum.MecanumChassis(
     wheel_init_dir=[1, 1, 1, 1],
-    wheel_init_map=[4, 1 , 3 , 2]
+    wheel_init_map=[1,2,3,4]
 )
 AK = ArmIK()
 def initMove():
     # Board.setPWMServoPulse(1, 1500, 500)
     # Board.setPWMServoPulse(3, 1500, 500)
-    Board.setPWMServoPulse(6, 1500, 500)
+    Board.setPWMServoPulse(6, 1440, 500)
     time.sleep(0.5)
     AK.setPitchRangeMoving((0, 6, 18), 0,-90, 90, 1500)
 
@@ -451,7 +451,7 @@ def main():
 
     print("✔ 黑線巡線結束")
     
-    #转向并识别二维码然后进门抓取并退出
+    # 转向并识别二维码然后进门抓取并退出
     print("\n启动金门抓取任务")
     controller.start_process("jinmenzhuaqu")
 
@@ -540,7 +540,7 @@ def main():
             break
 
         time.sleep(0.2)
-    turn_avoid(chassis, duration=0.5)
+    turn_avoid(chassis, duration=0.43)
     print("識別抓取結束")
      
     print("\n第二次超聲巡線開始")

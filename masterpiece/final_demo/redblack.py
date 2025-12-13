@@ -132,6 +132,7 @@ def detect_red_or_black(img, lab_data):
 # 初始位置
 def initMove():
     Board.setPWMServoPulse(5, 100, 500)   # 更向下倾斜
+    Board.setPWMServoPulse(6, 1440, 300)
     AK.setPitchRangeMoving((0, 8, 10), -90, -90, 0, 1500)
 
 # 设置检测颜色
@@ -151,8 +152,8 @@ def load_config():
 def initMove():
     Board.setPWMServoPulse(3, 500, 1000)  # 针对有小物块的情况
     Board.setPWMServoPulse(4, 2160, 1000)
-    Board.setPWMServoPulse(5, 1620, 1000)
-    Board.setPWMServoPulse(6, 1500, 1000)
+    Board.setPWMServoPulse(5, 1800, 1000)
+    Board.setPWMServoPulse(6, 1440, 1000)
     MotorStop()
     
 line_centerx = -1
@@ -414,10 +415,10 @@ def move():
                 tmp = 100 if tmp > 100 else tmp   
                 tmp = -100 if tmp < -100 else tmp
                 base_speed = Misc.map(tmp, -100, 100, -MAX_ADJUST_SPEED, MAX_ADJUST_SPEED)
-                Board.setMotor(1, -int(BASE_SPEED + base_speed))
+                Board.setMotor(1, int(BASE_SPEED - base_speed))
                 Board.setMotor(2, int(BASE_SPEED + base_speed))
                 Board.setMotor(3, int(BASE_SPEED - base_speed))
-                Board.setMotor(4, -int(BASE_SPEED - base_speed))
+                Board.setMotor(4, int(BASE_SPEED + base_speed))
                 
             else:
                 # 丢失线条处理

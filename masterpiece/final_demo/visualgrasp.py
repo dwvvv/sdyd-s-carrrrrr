@@ -25,7 +25,7 @@ if sys.version_info.major == 2:
 AK = ArmIK()
 chassis = mecanum.MecanumChassis(
     wheel_init_dir=[1, 1, 1, 1],
-    wheel_init_map=[4, 1, 3, 2]
+    wheel_init_map=[1, 2, 3, 4]
 )
 #从小车的顶部往下往前看 1是左前 2是左后 3是右后 4是右前
 # translation左为正 前为正
@@ -65,8 +65,8 @@ class PID:
         return output
 
 # 初始化 PID
-pid_x = PID(0.2, 0.2, 0.2) 
-pid_y = PID(0.2, 0.2, 0.2)
+pid_x = PID(0.6, 1, 1) 
+pid_y = PID(0.6, 1, 1)
 
 # ================= 基础硬件控制 =================
 
@@ -80,6 +80,7 @@ def init_hardware():
     Board.setMotor(4, 0)
     Board.setPWMServoPulse(1, 2500, 500)
     time.sleep(0.5)
+    Board.setPWMServoPulse(6,1440,300)
     AK.setPitchRangeMoving((0, 10, 10), -90, -90, 0, 1500)
     time.sleep(1)
 
@@ -109,7 +110,7 @@ def execute_grasp():
     print(">>> 启动抓取序列")
     chassis.set_velocity(0, 0, 0)
     time.sleep(1)
-    Board.setPWMServoPulse(1, 1800, 500)
+    Board.setPWMServoPulse(1, 2000, 300)
     time.sleep(0.5)
     target_x, target_y, target_z = GRASP_COORDINATE
     # print(f"机械臂移动至: {target_x}, {target_y}, {target_z}")
@@ -118,7 +119,7 @@ def execute_grasp():
     # res = AK.setPitchRangeMoving((target_x, target_y, target_z), -90, -90, 0, 1000)
     # if not res: 
         # print("❌ 目标坐标不可达！")
-    Board.setPWMServoPulse(3, 820, 500)
+    Board.setPWMServoPulse(3, 900, 500)
     Board.setPWMServoPulse(4, 1710, 500)
     Board.setPWMServoPulse(5, 2400, 500)
     time.sleep(1.2)
@@ -241,7 +242,7 @@ def main():
                     current_state = 1
                 else:
                     if time.time() - search_timer > 0.3:
-                        chassis.translation(60 * last_search_direction, 0)
+                        chassis.translation(-60 * last_search_direction, 0)
                         time.sleep(0.5)
                         chassis.set_velocity(0, 0, 0)
                         time.sleep(1)
@@ -268,10 +269,10 @@ def main():
                     print(vy)
                     if abs(err_x) < 5: vx = 0
                     if abs(err_y) < 5: vy = 0
-                    chassis.translation(-vx, -vy)
+                    chassis.translation(vx, -vy)
                     time.sleep(0.05)
                     chassis.set_velocity(0, 0, 0)
-                    time.sleep(1)
+                    time.sleep(0.5)
                     print(err_x, err_y)
                     if abs(err_x) < 30 and abs(err_y) < 10:
                         print(f"✅ 对准完成! ErrX:{int(err_x)}, Erry:{int(err_y)}")

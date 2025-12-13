@@ -25,7 +25,7 @@ if sys.version_info.major == 2:
 AK = ArmIK()
 chassis = mecanum.MecanumChassis(
     wheel_init_dir=[1, 1, 1, 1],
-    wheel_init_map=[4, 1, 3, 2]
+    wheel_init_map=[1, 2, 3, 4]
 )
 #从小车的顶部往下往前看 1是左前 2是左后 3是右后 4是右前
 # translation左为正 前为正
@@ -80,6 +80,7 @@ def init_hardware():
     Board.setMotor(4, 0)
     Board.setPWMServoPulse(1, 2500, 500)
     time.sleep(0.5)
+    Board.setPWMServoPulse(6, 1440, 300)
     AK.setPitchRangeMoving((0, 10, 10), -90, -90, 0, 1500)
     time.sleep(1)
 

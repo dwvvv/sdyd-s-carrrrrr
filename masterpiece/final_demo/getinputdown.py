@@ -213,17 +213,17 @@ distance_pid = PID(P=6.3, I=0.1, D=0.2)  # PID参数
 TARGET_QR_ID = 3 # 目标QR码ID
 
 # 目标距离设置
-FORWARD_TARGET_DISTANCE = 19.0  # 前进目标距离 (cm)
-BACKWARD_TARGET_DISTANCE = 42.8  # 后退目标距离 (cm)
+FORWARD_TARGET_DISTANCE = 25.0 # 前进目标距离 (cm)
+BACKWARD_TARGET_DISTANCE = 48.0  # 后退目标距离 (cm)
 DISTANCE_TOLERANCE = 1.0  # 距离容差 (cm)
 
 # ========== 小車控制 ==========
 
 servo1 = 800
-servo3 = 1230
+servo3 = 1500
 servo4 = 2500
 servo5 = 1300
-servo6 = 1500
+servo6 = 1440
 
 def initMove1():
     Board.setPWMServoPulse(1, servo1, 300)
@@ -234,7 +234,7 @@ def initMove1():
 
 def initMove2():
     Board.setPWMServoPulse(1, 2000, 800)
-    
+    Board.setPWMServoPulse(6, 1440, 300)
     AK.setPitchRangeMoving((0, 8, 10), -90, -90, 0, 1500)
 
 HWSONAR = Sonar.Sonar()
@@ -367,7 +367,7 @@ def move_backward_pid():
 
 chassis = mecanum.MecanumChassis(
     wheel_init_dir=[1, 1, 1, 1],
-    wheel_init_map=[4, 1 , 3 , 2]
+    wheel_init_map=[1, 2, 3, 4]
 )
 
 # -------------------------------
@@ -625,7 +625,7 @@ def move_to_qr():
                     print(vx)
                     if abs(err_x) < 5: vx = 0
                     # if abs(err_y) < 5: vy = 0
-                    chassis.translation(-vx, -0)
+                    chassis.translation(vx, -0)
                     time.sleep(0.05)
                     chassis.set_velocity(0, 0, 0)
                     time.sleep(1)

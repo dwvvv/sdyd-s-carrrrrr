@@ -250,7 +250,7 @@ AK = ArmIK()
 # 底盤初始化
 chassis = mecanum.MecanumChassis(
     wheel_init_dir=[1, 1, 1, 1],
-    wheel_init_map=[4, 1, 3, 2]
+    wheel_init_map=[1, 2, 3, 4]
 )
 
 def MotorStop():

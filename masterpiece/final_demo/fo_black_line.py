@@ -83,7 +83,7 @@ def initMove():
     Board.setPWMServoPulse(4, 2250 , 1000)#之前是2060
     # Board.setPWMServoPulse(5, 1620, 1000)
     Board.setPWMServoPulse(5, 1590, 1000)#之前是1740
-    Board.setPWMServoPulse(6, 1500 , 1000)
+    Board.setPWMServoPulse(6, 1440 , 1000)
     MotorStop()
     
 line_centerx = -1
@@ -336,10 +336,10 @@ def move():
                 tmp = 100 if tmp > 100 else tmp   
                 tmp = -100 if tmp < -100 else tmp
                 base_speed = Misc.map(tmp, -100, 100, -MAX_ADJUST_SPEED, MAX_ADJUST_SPEED)
-                Board.setMotor(1, -int(BASE_SPEED + base_speed))
+                Board.setMotor(1, int(BASE_SPEED - base_speed))
                 Board.setMotor(2, int(BASE_SPEED + base_speed))
                 Board.setMotor(3, int(BASE_SPEED - base_speed))
-                Board.setMotor(4, -int(BASE_SPEED - base_speed))
+                Board.setMotor(4, int(BASE_SPEED + base_speed))
                 
             else:
                 # 丢失线条处理

@@ -73,6 +73,7 @@ def MotorStop():
 def initMove():
     # 机械臂看地面的姿态
     Board.setPWMServoPulse(1, 1500, 800) # 爪子张开
+    Board.setPWMServoPulse(6, 1440, 300)
     AK.setPitchRangeMoving((0, 8, 10), -90, -90, 0, 1500)
 
 def reset():

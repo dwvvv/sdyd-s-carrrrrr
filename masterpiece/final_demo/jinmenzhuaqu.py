@@ -355,6 +355,7 @@ chassis = mecanum.MecanumChassis(
 
 def initMove():
     Board.setPWMServoPulse(1, 2000, 800)
+    Board.setPWMServoPulse(6, 1440, 300)
     AK.setPitchRangeMoving((0, 8, 10), -90, -90, 0, 1500)
 
 

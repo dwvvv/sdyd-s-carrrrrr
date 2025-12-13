@@ -50,7 +50,7 @@ range_rgb = {
 
 # 在range_rgb定义之后添加
 BASE_SPEED = 40  # 基础速度，原为50
-MAX_ADJUST_SPEED = 80  # 最大调节速度，原为50
+MAX_ADJUST_SPEED = 60  # 最大调节速度，原为50
 
 # 巡线
 if sys.version_info.major == 2:
@@ -99,10 +99,10 @@ def load_config():
 def initMove():
     
     Board.setPWMServoPulse(1, 2500 , 1000)
-    Board.setPWMServoPulse(3, 750 , 1000)
+    Board.setPWMServoPulse(3, 500 , 1000)
     Board.setPWMServoPulse(4, 2160 , 1000)
     Board.setPWMServoPulse(5, 1620, 1000)
-    Board.setPWMServoPulse(6, 1500 , 1000)
+    Board.setPWMServoPulse(6, 1440 , 1000)
     MotorStop()
     
 line_centerx = -1
@@ -355,10 +355,10 @@ def move():
                 tmp = 100 if tmp > 100 else tmp   
                 tmp = -100 if tmp < -100 else tmp
                 base_speed = Misc.map(tmp, -100, 100, -MAX_ADJUST_SPEED, MAX_ADJUST_SPEED)
-                Board.setMotor(1, -int(BASE_SPEED + base_speed))
+                Board.setMotor(1, int(BASE_SPEED - base_speed))
                 Board.setMotor(2, int(BASE_SPEED + base_speed))
                 Board.setMotor(3, int(BASE_SPEED - base_speed))
-                Board.setMotor(4, -int(BASE_SPEED - base_speed))
+                Board.setMotor(4, int(BASE_SPEED + base_speed))
                 
             else:
                 # 丢失线条处理

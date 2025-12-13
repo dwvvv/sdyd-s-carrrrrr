@@ -120,8 +120,8 @@ import HiwonderSDK.mecanum as mecanum
 
 # 初始化底盤
 chassis = mecanum.MecanumChassis(
-    wheel_init_dir=[1, 1, -1, -1],
-    wheel_init_map=[3, 1, 4, 2]
+    wheel_init_dir=[1, 1, 1, 1],
+    wheel_init_map=[1, 2, 3, 4]
 )
 MOVE_SPEED = 160
 ROTATE_SPEED = 0.6
@@ -247,11 +247,11 @@ def main():
             # -----------------------------------------
             elif k == 'd':
                 print("⬅ 左移")
-                chassis.set_velocity(MOVE_SPEED, 270, 0)
+                chassis.set_velocity(0, 0, 0.5)
 
             elif k == 'a':
                 print("➡ 右移")
-                chassis.set_velocity(MOVE_SPEED, 90, 0)
+                chassis.set_velocity(0, 0, -0.5)
 
             # -----------------------------------------
             # ⭐ 完全依照你的小車實際現象來補償方向 ⭐
@@ -260,22 +260,22 @@ def main():
             # W（要前進）→ 用「L 的動作（前進）」來補償
             elif k == 'j':
                 print("⬆ 前進（補償）")
-                chassis.set_velocity(MOVE_SPEED, 0, 0)
+                chassis.translation(-60, 0)
 
             # S（要後退）→ 用「J 的動作（後退）」來補償
             elif k == 'l':
                 print("⬇ 後退（補償）")
-                chassis.set_velocity(MOVE_SPEED, 180, 0)
+                chassis.translation(60, 0)
 
             # J（要左旋）→ 用「W 的動作（左旋）」來補償
             elif k == 's':
                 print("⟲ 左旋（補償）")
-                chassis.set_velocity(0, 0, ROTATE_SPEED)
+                chassis.translation(0, -60)
 
             # L（要右旋）→ 用「S 的動作（右旋）」來補償
             elif k == 'w':
                 print("⟳ 右旋（補償）")
-                chassis.set_velocity(0, 0, -ROTATE_SPEED)
+                chassis.translation(0, 60)
 
             else:
                 MotorStop()

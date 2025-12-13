@@ -16,13 +16,13 @@ import HiwonderSDK.mecanum as mecanum
 
 chassis = mecanum.MecanumChassis(
     wheel_init_dir=[1, 1, 1, 1],
-    wheel_init_map=[4, 1, 3, 2]
+    wheel_init_map=[1, 2, 3, 4]
 
 )
 AK = ArmIK()
 if __name__ == '__main__':
     chassis.translation(60,0)
-    time.sleep(6)
+    time.sleep(2)
     chassis.translation(0,0)
     # AK.setPitchRangeMoving((0, 6, 18), 0,-90, 90, 1500)
     # time.sleep(1.5)

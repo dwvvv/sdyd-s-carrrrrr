@@ -18,7 +18,7 @@ from HiwonderSDK.PID import PID
 
 chassis = mecanum.MecanumChassis(
     wheel_init_dir=[1, 1, 1, 1],
-    wheel_init_map=[4, 1 , 3 , 2]
+    wheel_init_map=[1, 2, 3, 4]
 )
 # PID控制的超声波定位校准程序
 
@@ -49,6 +49,7 @@ distance_data = []
 # 初始位置
 def initMove():
     chassis.set_velocity(0, 0, 0)
+    Board.setPWMServoPulse(6, 1440, 300)
     Board.setPWMServoPulse(1, 1500, 300)
     AK.setPitchRangeMoving((0, 6, 18), 0, -90, 90, 1500)
 

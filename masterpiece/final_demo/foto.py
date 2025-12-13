@@ -10,7 +10,7 @@ servo1 = 2500
 servo3 = 1230
 servo4 = 2500
 servo5 = 1300
-servo6 = 1500
+servo6 = 1440
 
 def initMove1():
     # Board.setPWMServoPulse(1, servo1, 300)

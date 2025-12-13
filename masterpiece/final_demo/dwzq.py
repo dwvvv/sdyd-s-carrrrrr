@@ -66,7 +66,7 @@ servo1 = 1500
 # 初始位置
 def initMove():
     Board.setPWMServoPulse(1, servo1, 800)
-    Board.setPWMServoPulse(6, 1500, 500)  # 舵机6回到中位
+    Board.setPWMServoPulse(6, 1440, 500)  # 舵机6回到中位
     AK.setPitchRangeMoving((0, 8, 10), -90, -90, 0, 1500)
 
 count = 0
